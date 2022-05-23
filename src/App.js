@@ -20,6 +20,10 @@ import Blogs from "./Components/Pages/Blogs/Blogs";
 import MyPortfolio from "./Components/Pages/MyPortfolio/MyPortfolio";
 import Pagenotfound from "./Components/Pages/Pagenotfound/Pagenotfound";
 
+import { ToastContainer } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
+
 function App() {
   return (
     <div className="App">
@@ -87,6 +91,7 @@ function App() {
         <Route path="*" element={<Pagenotfound />}></Route>
       </Routes>
       <Footer></Footer>
+      <ToastContainer />
     </div>
   );
 }
