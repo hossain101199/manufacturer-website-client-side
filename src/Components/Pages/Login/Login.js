@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
+  useSendPasswordResetEmail,
   useSignInWithEmailAndPassword,
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
@@ -13,6 +14,29 @@ const Login = () => {
   const [signInWithEmailAndPassword, suser, sloading, serror] =
     useSignInWithEmailAndPassword(auth);
   const [signInWithGoogle, guser, gloading, gerror] = useSignInWithGoogle(auth);
+  const [sendPasswordResetEmail, sending, reserror] =
+    useSendPasswordResetEmail(auth);
+
+  // ---------------------------------------------------------
+  const [userInfo, setuserInfo] = useState({
+    email: "",
+  });
+  // ---------------------------------------------------------
+  const [usererror, setusererror] = useState({
+    email: "",
+  });
+  // ---------------------------------------------------------
+  const handleEmail = (e) => {
+    const emilRegex = /\S+@\S+\.\S+/;
+    const validEmail = emilRegex.test(e.target.value);
+    if (validEmail) {
+      setuserInfo({ ...userInfo, email: e.target.value });
+      setusererror({ ...usererror, email: "" });
+    } else {
+      setusererror({ ...usererror, email: "Invalid email" });
+      setuserInfo({ ...userInfo, email: "" });
+    }
+  };
   const {
     register,
     formState: { errors },
@@ -21,6 +45,23 @@ const Login = () => {
   // ---------------------------------------------------------
   const onSubmit = (data) => {
     signInWithEmailAndPassword(data.email, data.password);
+  };
+  // ---------------------------------------------------------
+  const handleForgotpass = () => {
+    if (!userInfo.email) {
+      setusererror({ ...usererror, email: "Please enter your email" });
+    } else {
+      sendPasswordResetEmail(userInfo.email);
+      toast.info("An email has been sent", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   };
   // ---------------------------------------------------------
   const navigate = useNavigate();
@@ -33,24 +74,31 @@ const Login = () => {
   }, [suser, guser, from, navigate]);
   // ---------------------------------------------------------
   useEffect(() => {
-    if (sloading || gloading) {
+    if (sloading || gloading || sending) {
       <Loading></Loading>;
     }
-  }, [sloading, gloading]);
+  }, [sloading, gloading, sending]);
   // ---------------------------------------------------------
   useEffect(() => {
-    if (serror || gerror || errors) {
-      toast.error(serror?.message || gerror?.message || errors?.message, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+    if (serror || gerror || errors || reserror) {
+      toast.error(
+        serror?.message ||
+          gerror?.message ||
+          errors?.message ||
+          reserror?.message,
+        {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        }
+      );
     }
-  }, [serror, gerror, errors]);
+  }, [serror, gerror, errors, reserror]);
+
   return (
     <div>
       <div className="hero min-h-screen bg-base-200">
@@ -119,14 +167,18 @@ const Login = () => {
                     </span>
                   )}
                 </div>
+                <label className="label">
+                  <label
+                    htmlFor="my-modal"
+                    className=" text-red-600 modal-button label-text-alt link link-hover"
+                  >
+                    Forgot password?
+                  </label>
+                </label>
                 <div className="form-control mt-6">
                   <input type="submit" value="Login" className="btn"></input>
                 </div>
               </form>
-              <span className="label label-text text-red-600">
-                {/* {signInError} */}
-              </span>
-
               <div className="form-control mt-6">
                 <p>
                   Don't have an account?{" "}
@@ -141,6 +193,38 @@ const Login = () => {
                   Continue with Google
                 </button>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <input type="checkbox" id="my-modal" className="modal-toggle" />
+      <div className="modal">
+        <div className="modal-box">
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Email</span>
+            </label>
+            <input
+              onChange={handleEmail}
+              type="Email"
+              name="email"
+              placeholder="email"
+              className="input input-bordered"
+              required
+            />
+            {usererror?.email && (
+              <span className="label label-text text-red-600">
+                {usererror.email}
+              </span>
+            )}
+            <div className="modal-action">
+              <label
+                htmlFor="my-modal"
+                className="btn"
+                onClick={handleForgotpass}
+              >
+                Reset password
+              </label>
             </div>
           </div>
         </div>

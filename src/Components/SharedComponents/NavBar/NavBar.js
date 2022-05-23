@@ -10,6 +10,15 @@ const NavBar = () => {
   const [user, loading, error] = useAuthState(auth);
   const logout = () => {
     signOut(auth);
+    toast.info("this session has been log out", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   };
   // ---------------------------------------------------------
   useEffect(() => {
@@ -94,7 +103,7 @@ const NavBar = () => {
           <div className="navbar-end">
             <div className="dropdown dropdown-end">
               <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
-                <div className="w-10 rounded-full">
+                <div className="w-10 ring rounded-full">
                   <img alt="" src={user?.photoURL} />
                 </div>
               </label>
