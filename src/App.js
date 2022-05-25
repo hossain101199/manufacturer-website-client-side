@@ -23,8 +23,13 @@ import Pagenotfound from "./Components/Pages/Pagenotfound/Pagenotfound";
 import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
+import { useAuthState } from "react-firebase-hooks/auth";
+import useAdmin from "./Components/SharedComponents/Hooks/verifyAdmin";
+import auth from "./firebase.init";
 
 function App() {
+  const [user] = useAuthState(auth);
+  const [admin] = useAdmin(user);
   return (
     <div className="App">
       <NavBar></NavBar>
@@ -48,17 +53,19 @@ function App() {
             </RequireAuth>
           }
         >
-          <Route index element={<MyOrders />}></Route>
+          {!admin && <Route index element={<MyOrders />}></Route>}
+          {admin && (
+            <Route
+              index
+              element={
+                <RequireAdmin>
+                  <ManageAllOrders />
+                </RequireAdmin>
+              }
+            ></Route>
+          )}
           <Route path="AddReview" element={<AddReview />}></Route>
           <Route path="MyProfile" element={<MyProfile />}></Route>
-          <Route
-            path="ManageAllOrders"
-            element={
-              <RequireAdmin>
-                <ManageAllOrders />
-              </RequireAdmin>
-            }
-          ></Route>
           <Route
             path="AddProduct"
             element={

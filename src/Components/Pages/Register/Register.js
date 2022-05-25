@@ -3,17 +3,22 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   useCreateUserWithEmailAndPassword,
   useSignInWithGoogle,
+  useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
 import Loading from "../../SharedComponents/Loading/Loading";
 import { toast } from "react-toastify";
+import useToken from "../../SharedComponents/Hooks/useToken";
 
 const Register = () => {
   const [createUserWithEmailAndPassword, cuser, cloading, cerror] =
     useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
+  const [updateProfile, updating, error] = useUpdateProfile(auth);
   const [signInWithGoogle, guser, gloading, gerror] = useSignInWithGoogle(auth);
+  const [token] = useToken(cuser || guser);
   // ---------------------------------------------------------
   const [userInfo, setuserInfo] = useState({
+    name: "",
     email: "",
     password: "",
     Confirmpassword: "",
@@ -25,6 +30,10 @@ const Register = () => {
     Confirmpassword: "",
     allError: "",
   });
+  // ---------------------------------------------------------
+  const hendlename = (e) => {
+    setuserInfo({ ...userInfo, name: e.target.value });
+  };
   // ---------------------------------------------------------
   const handleEmail = (e) => {
     const emilRegex = /\S+@\S+\.\S+/;
@@ -79,6 +88,7 @@ const Register = () => {
       });
     } else {
       createUserWithEmailAndPassword(userInfo.email, userInfo.password);
+      updateProfile({ displayName: userInfo.name });
     }
   };
   // ---------------------------------------------------------
@@ -86,19 +96,19 @@ const Register = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
   useEffect(() => {
-    if (cuser || guser) {
+    if (token) {
       navigate(from);
     }
-  }, [cuser, guser, from, navigate]);
+  }, [from, navigate, token]);
   // ---------------------------------------------------------
   useEffect(() => {
-    if (cloading || gloading) {
+    if (cloading || gloading || updating) {
       <Loading></Loading>;
     }
-  }, [cloading, gloading]);
+  }, [cloading, gloading, updating]);
   // ---------------------------------------------------------
   useEffect(() => {
-    if (cerror || gerror) {
+    if (cerror || gerror || error) {
       toast.error(cerror?.message || gerror?.message, {
         position: "top-center",
         autoClose: 5000,
@@ -109,13 +119,14 @@ const Register = () => {
         progress: undefined,
       });
     }
-  }, [cerror, gerror]);
+  }, [cerror, gerror, error]);
   return (
     <div>
       <div className="hero min-h-screen bg-base-200">
         <div className="hero-content">
           <div className="card md:w-96 shadow-2xl bg-base-100">
             <div className="card-body">
+              <h2 className="text-center text-2xl font-bold">Sign Up</h2>
               <form onSubmit={handlecreateUser}>
                 <div className="form-control">
                   <label className="label">
@@ -126,6 +137,7 @@ const Register = () => {
                     name="name"
                     placeholder="Your full name"
                     className="input input-bordered"
+                    onBlur={hendlename}
                   />
                 </div>
                 <div className="form-control">
@@ -150,7 +162,7 @@ const Register = () => {
                     <span className="label-text">Password</span>
                   </label>
                   <input
-                    onChange={handlePassword}
+                    onBlur={handlePassword}
                     type="password"
                     name="password"
                     placeholder="password"

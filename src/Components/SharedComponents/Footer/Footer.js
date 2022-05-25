@@ -99,7 +99,7 @@ const Footer = () => {
                 <input
                   type="text"
                   placeholder="username@site.com"
-                  className="input input-bordered w-full pr-16"
+                  className="input input-bordered w-full pr-16 text-black"
                 />
                 <button className="btn absolute top-0 right-0 rounded-l-none">
                   Subscribe

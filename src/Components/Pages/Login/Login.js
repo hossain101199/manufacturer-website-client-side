@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import auth from "../../../firebase.init";
+import useToken from "../../SharedComponents/Hooks/useToken";
 import Loading from "../../SharedComponents/Loading/Loading";
 
 const Login = () => {
@@ -16,7 +17,7 @@ const Login = () => {
   const [signInWithGoogle, guser, gloading, gerror] = useSignInWithGoogle(auth);
   const [sendPasswordResetEmail, sending, reserror] =
     useSendPasswordResetEmail(auth);
-
+  const [token] = useToken(suser || guser);
   // ---------------------------------------------------------
   const [userInfo, setuserInfo] = useState({
     email: "",
@@ -68,10 +69,10 @@ const Login = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
   useEffect(() => {
-    if (suser || guser) {
+    if (token) {
       navigate(from);
     }
-  }, [suser, guser, from, navigate]);
+  }, [from, navigate, token]);
   // ---------------------------------------------------------
   useEffect(() => {
     if (sloading || gloading || sending) {
@@ -105,6 +106,7 @@ const Login = () => {
         <div className="hero-content">
           <div className="card md:w-96 shadow-2xl bg-base-100">
             <div className="card-body">
+              <h2 className="text-center text-2xl font-bold">Login</h2>
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="form-control">
                   <label className="label">
@@ -169,7 +171,7 @@ const Login = () => {
                 </div>
                 <label className="label">
                   <label
-                    htmlFor="my-modal"
+                    htmlhtmlfor="my-modal"
                     className=" text-red-600 modal-button label-text-alt link link-hover"
                   >
                     Forgot password?
@@ -219,7 +221,7 @@ const Login = () => {
             )}
             <div className="modal-action">
               <label
-                htmlFor="my-modal"
+                htmlhtmlfor="my-modal"
                 className="btn"
                 onClick={handleForgotpass}
               >
