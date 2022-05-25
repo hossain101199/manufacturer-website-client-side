@@ -5,12 +5,14 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
 import Loading from "../Loading/Loading";
 import { toast } from "react-toastify";
+import useAdmin from "../Hooks/verifyAdmin";
 
 const NavBar = () => {
   const [user, loading, error] = useAuthState(auth);
+  const [admin] = useAdmin(user);
   const logout = () => {
     signOut(auth);
-    localStorage.removeItem('accessToken');
+    localStorage.removeItem("accessToken");
     toast.info("this session has been log out", {
       position: "top-center",
       autoClose: 5000,
@@ -121,9 +123,9 @@ const NavBar = () => {
                   className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
                 >
                   <li className="indicator">
-                    <Link to="#">{user.displayName}</Link>
+                    <p>{user.email}</p>
                     <span className="indicator-item badge text-white">
-                      Required
+                      {admin}
                     </span>
                   </li>
                   <li>
