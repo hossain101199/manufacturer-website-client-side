@@ -65,7 +65,7 @@ function App() {
             ></Route>
           )}
           {!admin && <Route path="AddReview" element={<AddReview />}></Route>}
-          {!admin && <Route path="MyProfile" element={<MyProfile />}></Route>}
+          <Route path="MyProfile" element={<MyProfile />}></Route>
           <Route
             path="AddProduct"
             element={
