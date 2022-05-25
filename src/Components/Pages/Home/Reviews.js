@@ -10,7 +10,7 @@ const Reviews = () => {
   }, [reviews]);
   return (
     <div className=" container mx-auto ">
-      all reviews {reviews.length}
+      <div class="divider">Customer Reviews</div>
       <div className=" md:flex gap-14 justify-center ">
         {reviews.map((review, index) => (
           <ReviewCard key={review._id} review={review}></ReviewCard>
