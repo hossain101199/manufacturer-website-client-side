@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from "react";
+import ReviewCard from "./ReviewCard";
 
 const Reviews = () => {
   const [reviews, setreviews] = useState([]);
-  const [isReload, setIsReload] = useState(false);
-  console.log(reviews);
   useEffect(() => {
-    fetch("http://localhost:5000/review")
+    fetch("https://aitch-s-light.herokuapp.com/review")
       .then((res) => res.json())
       .then((data) => setreviews(data));
-  }, [isReload]);
-  return <div className="">all reviews {reviews.length}
-  </div>;
+  }, [reviews]);
+  return (
+    <div className=" container mx-auto ">
+      all reviews {reviews.length}
+      <div className=" md:flex gap-14 justify-center ">
+        {reviews.map((review, index) => (
+          <ReviewCard key={review._id} review={review}></ReviewCard>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default Reviews;

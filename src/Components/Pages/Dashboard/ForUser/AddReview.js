@@ -25,7 +25,7 @@ const AddReview = () => {
     if (rating === 0) {
       return seterror("you have to select at least one star");
     } else {
-      fetch("http://localhost:5000/review", {
+      fetch("https://aitch-s-light.herokuapp.com/review", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -56,36 +56,36 @@ const AddReview = () => {
         <form onSubmit={handleADDreview} className="card-body">
           <div className="md:flex gap-x-8">
             <div className="basis-1/2">
-              <div class="rating">
+              <div className="rating">
                 <input
                   onClick={() => ratings(1)}
                   type="radio"
                   name="rating-1"
-                  class="mask mask-star"
+                  className="mask mask-star"
                 />
                 <input
                   onClick={() => ratings(2)}
                   type="radio"
                   name="rating-1"
-                  class="mask mask-star"
+                  className="mask mask-star"
                 />
                 <input
                   onClick={() => ratings(3)}
                   type="radio"
                   name="rating-1"
-                  class="mask mask-star"
+                  className="mask mask-star"
                 />
                 <input
                   onClick={() => ratings(4)}
                   type="radio"
                   name="rating-1"
-                  class="mask mask-star"
+                  className="mask mask-star"
                 />
                 <input
                   onClick={() => ratings(5)}
                   type="radio"
                   name="rating-1"
-                  class="mask mask-star"
+                  className="mask mask-star"
                 />
               </div>
               {error && <p className=" text-red-600 ">{error}</p>}
