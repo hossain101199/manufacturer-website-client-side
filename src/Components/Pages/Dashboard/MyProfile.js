@@ -30,16 +30,17 @@ const MyProfile = () => {
     const address = e.target.address.value;
     const userInformation = {
       name,
-      email,
       phone,
       linkedin,
       education,
       address,
     };
     // send data to the server
-    fetch(`https://aitch-s-light.herokuapp.com/user/admin/${user?.email}`, {
+    fetch(`https://aitch-s-light.herokuapp.com/userInformation/${email}`, {
       method: "PUT",
+
       headers: {
+        "content-type": "application/json",
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
       body: JSON.stringify(userInformation),
@@ -76,6 +77,7 @@ const MyProfile = () => {
               </label>
               <input
                 name="name"
+                defaultValue={me?.name}
                 type="name"
                 className="input input-bordered w-full"
               />
@@ -86,7 +88,7 @@ const MyProfile = () => {
               </label>
               <input
                 name="email"
-                defaultValue={user.email}
+                defaultValue={me?.email}
                 readOnly
                 type="Email"
                 className="input input-bordered w-full"
@@ -100,6 +102,7 @@ const MyProfile = () => {
               </label>
               <input
                 name="phone"
+                defaultValue={me?.phone}
                 type="number"
                 className="input input-bordered w-full"
               />
@@ -110,6 +113,7 @@ const MyProfile = () => {
               </label>
               <input
                 name="linkedin"
+                defaultValue={me?.linkedin}
                 type="text"
                 className="input input-bordered w-full"
               />
@@ -119,6 +123,7 @@ const MyProfile = () => {
             <span className="label-text">Your Education level</span>
           </label>
           <input
+            defaultValue={me?.education}
             name="education"
             type="text"
             className="input input-bordered"
@@ -126,7 +131,12 @@ const MyProfile = () => {
           <label className="label">
             <span className="label-text">Address</span>
           </label>
-          <input name="address" type="text" className="input input-bordered" />
+          <input
+            defaultValue={me?.address}
+            name="address"
+            type="text"
+            className="input input-bordered"
+          />
 
           <div className="card-actions justify-end">
             <input type="submit" value="Save changes" className="btn"></input>

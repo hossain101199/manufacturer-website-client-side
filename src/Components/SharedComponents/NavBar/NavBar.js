@@ -27,7 +27,7 @@ const NavBar = () => {
   const [isReload] = useState(false);
   const [me] = users?.filter((mine) => mine.email === user?.email);
   useEffect(() => {
-    fetch("http://localhost:5000/user", {
+    fetch("https://aitch-s-light.herokuapp.com/user", {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -136,10 +136,13 @@ const NavBar = () => {
                   className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-auto "
                 >
                   <li className="indicator">
-                    <p>{user.email}</p>
+                    <p>{me?.name}</p>
                     <span className="indicator-item badge text-white">
                       {me?.role}
                     </span>
+                  </li>
+                  <li className="indicator">
+                    <p>{user.email}</p>
                   </li>
                   <li>
                     <button onClick={logout}>Logout</button>

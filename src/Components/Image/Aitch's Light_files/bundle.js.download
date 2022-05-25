@@ -1390,7 +1390,7 @@ const MyProfile = () => {
       address
     }; // send data to the server
 
-    fetch(`http://localhost:5000/user/${user === null || user === void 0 ? void 0 : user.email}`, {
+    fetch(`https://aitch-s-light.herokuapp.com/user/${user === null || user === void 0 ? void 0 : user.email}`, {
       method: "PUT",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`
@@ -4746,7 +4746,7 @@ const NavBar = () => {
   const [isReload, setIsReload] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const [me] = users === null || users === void 0 ? void 0 : users.filter(mine => mine.email === (user === null || user === void 0 ? void 0 : user.email));
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    fetch("http://localhost:5000/user", {
+    fetch("https://aitch-s-light.herokuapp.com/user", {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`
