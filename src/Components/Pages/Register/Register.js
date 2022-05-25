@@ -34,6 +34,7 @@ const Register = () => {
   const hendlename = (e) => {
     setuserInfo({ ...userInfo, name: e.target.value });
   };
+
   // ---------------------------------------------------------
   const handleEmail = (e) => {
     const emilRegex = /\S+@\S+\.\S+/;
