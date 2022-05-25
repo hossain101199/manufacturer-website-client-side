@@ -1,15 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
 import Loading from "../Loading/Loading";
 import { toast } from "react-toastify";
-import useAdmin from "../Hooks/verifyAdmin";
 
 const NavBar = () => {
   const [user, loading, error] = useAuthState(auth);
-  const [admin] = useAdmin(user);
+
   const logout = () => {
     signOut(auth);
     localStorage.removeItem("accessToken");
@@ -23,6 +22,20 @@ const NavBar = () => {
       progress: undefined,
     });
   };
+  // ---------------------------------------------------------
+  const [users, setUsers] = useState([]);
+  const [isReload] = useState(false);
+  const [me] = users?.filter((mine) => mine.email === user?.email);
+  useEffect(() => {
+    fetch("http://localhost:5000/user", {
+      method: "GET",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => setUsers(data));
+  }, [isReload]);
   // ---------------------------------------------------------
   useEffect(() => {
     if (loading) {
@@ -125,7 +138,7 @@ const NavBar = () => {
                   <li className="indicator">
                     <p>{user.email}</p>
                     <span className="indicator-item badge text-white">
-                      {admin}
+                      {me?.role}
                     </span>
                   </li>
                   <li>

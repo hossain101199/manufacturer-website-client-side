@@ -4,7 +4,7 @@ const Banner = () => {
   return (
     <div>
       <div
-      alt=""
+        alt=""
         className="hero min-h-screen"
         style={{
           background: `url(https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y2Fyc3xlbnwwfHwwfHw%3D&w=1000&q=80w=1000&h=800)`,

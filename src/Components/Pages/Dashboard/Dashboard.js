@@ -16,7 +16,6 @@ const Dashboard = () => {
           className="drawer-toggle"
         />
         <div className="drawer-content">
-          <h2 className="text-2xl font-bold">Dashboard</h2>
           <Outlet></Outlet>
         </div>
         <div className="drawer-side">
