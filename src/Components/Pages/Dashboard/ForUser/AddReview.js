@@ -9,7 +9,7 @@ const AddReview = () => {
   const [describe, setdescribe] = useState("");
   const [error, seterror] = useState("");
   const Ruser = user.email;
-  console.log(user);
+
   const ratings = (e) => {
     setRating(e);
     seterror("");
@@ -20,7 +20,7 @@ const AddReview = () => {
   };
   const handleADDreview = (e) => {
     const review = { Ruser, rating, describe };
-    console.log();
+
     e.preventDefault();
     if (rating === 0) {
       return seterror("you have to select at least one star");
