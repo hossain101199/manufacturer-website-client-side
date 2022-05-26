@@ -17,23 +17,6 @@ const CheckoutForm = ({ order }) => {
 
   const { _id, price, name, email } = order;
 
-  useEffect(() => {
-    fetch("https://secret-dusk-46242.herokuapp.com/create-payment-intent", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-      body: JSON.stringify({ price }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data?.clientSecret) {
-          setClientSecret(data.clientSecret);
-        }
-      });
-  }, [price]);
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -78,22 +61,9 @@ const CheckoutForm = ({ order }) => {
 
       //store payment on database
       const payment = {
-        appointment: _id,
+        orderid: _id,
         transactionId: paymentIntent.id,
       };
-      fetch(`https://secret-dusk-46242.herokuapp.com/booking/${_id}`, {
-        method: "PATCH",
-        headers: {
-          "content-type": "application/json",
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-        body: JSON.stringify(payment),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setProcessing(false);
-          console.log(data);
-        });
     }
   };
   return (
