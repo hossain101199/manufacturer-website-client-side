@@ -4,7 +4,7 @@ const SetOrders = () => {
   const [isReload, setIsReload] = useState(false);
   const [Orders, setOrders] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/orders", {
+    fetch(" https://aitch-s-light.herokuapp.com/orders", {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,

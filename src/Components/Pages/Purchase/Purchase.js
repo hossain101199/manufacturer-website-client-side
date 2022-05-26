@@ -5,8 +5,8 @@ import { toast } from "react-toastify";
 import auth from "../../../firebase.init";
 
 const Purchase = () => {
-  const [user, loading, useerror] = useAuthState(auth);
-  const [isReload, setIsReload] = useState(false);
+  const [user] = useAuthState(auth);
+  const [isReload] = useState(false);
   const [users, setUsers] = useState([]);
   const { productID } = useParams();
   const [selectedproduct, setselectedproduct] = useState({});
@@ -14,7 +14,7 @@ const Purchase = () => {
   const [isable, setisable] = useState(true);
 
   useEffect(() => {
-    const url = `http://localhost:5000/product/${productID}`;
+    const url = `https://aitch-s-light.herokuapp.com/product/${productID}`;
     fetch(url, {
       method: "GET",
       headers: {
@@ -54,8 +54,10 @@ const Purchase = () => {
     setisable(true);
   };
   // ----------------------------------------------------------------------------------
+
   const handleADDorders = (e) => {
     const img = selectedproduct.img;
+    const price = selectedproduct.price;
     const pname = selectedproduct.name;
     const name = e.target.name.value;
     const quantity = e.target.quantity.value;
@@ -72,9 +74,10 @@ const Purchase = () => {
       email,
       address,
       status,
+      price,
     };
     e.preventDefault();
-    fetch("http://localhost:5000/orders", {
+    fetch("https://aitch-s-light.herokuapp.com/orders", {
       method: "POST",
       headers: {
         "content-type": "application/json",

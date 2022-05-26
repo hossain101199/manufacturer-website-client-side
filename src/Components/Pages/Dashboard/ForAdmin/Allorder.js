@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import SetOrders from "../../../SharedComponents/Hooks/SetOrders";
 
 const Allorder = ({ Order, index }) => {
   const [Orders, setOrders] = SetOrders();
   const handleDelete = (id) => {
-    const url = `http://localhost:5000/product/${id}`;
+    const url = `https://aitch-s-light.herokuapp.com/product/${id}`;
     fetch(url, {
       method: "DELETE",
     })

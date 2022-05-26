@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import SetOrders from "../../../SharedComponents/Hooks/SetOrders";
-
-const Myordertr = ({ Order, index }) => {
+const AllOrders = ({ Order, index }) => {
+  console.log(Order);
   const [isable, setisable] = useState(true);
   const [Orders, setOrders] = SetOrders();
   const handleDelete = (id) => {
@@ -17,17 +16,13 @@ const Myordertr = ({ Order, index }) => {
       });
   };
   useEffect(() => {
+    console.log(isable);
     if (Order.status === "unpaid") {
       setisable(true);
     } else {
       setisable(false);
     }
   }, [Order.status, isable]);
-
-  const navigate = useNavigate();
-  const navigateToPurchase = (id) => {
-    navigate(`/Paymentpage/${id}`);
-  };
   return (
     <>
       <tr>
@@ -36,17 +31,14 @@ const Myordertr = ({ Order, index }) => {
           <img style={{ width: "50px" }} src={Order.img} alt="" />
           {Order.pname}
         </td>
+        <td>{Order.email}</td>
         <td>{Order.quantity} unit </td>
         <td>{Order.status}</td>
         <td>
           {isable && (
             <>
-              <button
-                onClick={() => navigateToPurchase(Order._id)}
-                type="button"
-                className="btn m-1"
-              >
-                Pay now
+              <button type="button" className="btn">
+                Update
               </button>
 
               <label for="my-modal" className="btn modal-button">
@@ -78,4 +70,4 @@ const Myordertr = ({ Order, index }) => {
   );
 };
 
-export default Myordertr;
+export default AllOrders;

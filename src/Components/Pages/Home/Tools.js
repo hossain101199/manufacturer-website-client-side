@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import HomeItem from "./HomeItem";
 
 const Tools = () => {
@@ -8,13 +7,15 @@ const Tools = () => {
   const [page, setpage] = useState(0);
   const [pagesize, setpagesize] = useState(3);
   useEffect(() => {
-    fetch(`http://localhost:5000/products?page=${page}&size=${pagesize}`)
+    fetch(
+      `https://aitch-s-light.herokuapp.com/products?page=${page}&size=${pagesize}`
+    )
       .then((res) => res.json())
       .then((data) => setProducts(data));
   }, [page, pagesize]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/productCount")
+    fetch("https://aitch-s-light.herokuapp.com/productCount")
       .then((res) => res.json())
       .then((data) => {
         const count = data.products;

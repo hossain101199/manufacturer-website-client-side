@@ -26,12 +26,13 @@ import "react-toastify/dist/ReactToastify.css";
 import { useAuthState } from "react-firebase-hooks/auth";
 import useAdmin from "./Components/SharedComponents/Hooks/verifyAdmin";
 import auth from "./firebase.init";
+import Paymentpage from "./Components/Pages/Paymentpage/Paymentpage";
 
 function App() {
   const [user] = useAuthState(auth);
   const [admin] = useAdmin(user);
   return (
-    <div className="App">
+    <div className="">
       <NavBar></NavBar>
       <Routes>
         <Route></Route>
@@ -42,6 +43,14 @@ function App() {
           element={
             <RequireAuth>
               <Purchase />
+            </RequireAuth>
+          }
+        ></Route>
+        <Route
+          path="Paymentpage/:orderID"
+          element={
+            <RequireAuth>
+              <Paymentpage />
             </RequireAuth>
           }
         ></Route>
