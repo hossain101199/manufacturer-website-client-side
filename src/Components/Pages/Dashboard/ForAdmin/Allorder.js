@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import SetOrders from "../../../SharedComponents/Hooks/SetOrders";
 
-const Myordertr = ({ Order, index }) => {
-  const [isable, setisable] = useState(true);
+const Allorder = ({ Order, index }) => {
   const [Orders, setOrders] = SetOrders();
   const handleDelete = (id) => {
-    const url = `http://localhost:5000/orders/${id}`;
+    const url = `http://localhost:5000/product/${id}`;
     fetch(url, {
       method: "DELETE",
     })
@@ -15,36 +14,23 @@ const Myordertr = ({ Order, index }) => {
         setOrders(remaining);
       });
   };
-  useEffect(() => {
-    console.log(isable);
-    if (Order.status === "unpaid") {
-      setisable(true);
-    } else {
-      setisable(false);
-    }
-  }, [Order.status]);
+
   return (
     <>
       <tr>
         <th scope="row">{index + 1}</th>{" "}
         <td className="max-w-md whitespace-pre-wrap">
           <img style={{ width: "50px" }} src={Order.img} alt="" />
-          {Order.pname}
+          {Order.name}
         </td>
-        <td>{Order.quantity} unit </td>
-        <td>{Order.status}</td>
+        <td>{Order.availableunit} unit </td>
         <td>
-          {isable && (
-            <>
-              <button type="button" className="btn">
-                Update
-              </button>
-
-              <label for="my-modal" className="btn modal-button">
-                Cancel
-              </label>
-            </>
-          )}
+          <button type="button" className="btn">
+            Update
+          </button>
+          <label for="my-modal" className="btn modal-button">
+            Delete
+          </label>
         </td>
       </tr>
       {/* <!-- Put this part before </body> tag --> */}
@@ -54,10 +40,10 @@ const Myordertr = ({ Order, index }) => {
           <h3 class="font-bold text-lg">
             are you sure??
             <br />
-            you want to cancel this order
+            you want to Delete this order
           </h3>
-          <p class="py-4">{Order.pname}</p>
-          <p class="py-4">{Order.quantity} unit </p>
+          <p class="py-4">{Order.name}</p>
+          <p class="py-4">{Order.availableunit} unit </p>
           <div class="modal-action" onClick={() => handleDelete(Order._id)}>
             <label for="my-modal" class="btn">
               Yay!
@@ -69,4 +55,4 @@ const Myordertr = ({ Order, index }) => {
   );
 };
 
-export default Myordertr;
+export default Allorder;
