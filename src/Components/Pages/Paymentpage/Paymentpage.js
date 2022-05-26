@@ -7,7 +7,9 @@ import Loading from "../../SharedComponents/Loading/Loading";
 import CheckoutForm from "./CheckoutForm";
 import SetOrders from "../../SharedComponents/Hooks/SetOrders";
 
-const stripePromise = loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
+const stripePromise = loadStripe(
+  "pk_test_51KzgdMJVa6zVY99CaGts94G8qqJirQWPMAET7VBqrec0wWSxhuuRtgQNPA3SuwzjQKOv6QWwjgMWEfZ83N1qLNUU00IX1ciL6e"
+);
 
 const Paymentpage = () => {
   const { orderID } = useParams();
@@ -26,7 +28,7 @@ const Paymentpage = () => {
   if (isLoading) {
     return <Loading></Loading>;
   }
-  console.log(order);
+
   return (
     <div className=" container mx-auto ">
       <div class="card w-50 max-w-md bg-base-100 shadow-xl my-12">
@@ -41,9 +43,9 @@ const Paymentpage = () => {
       </div>
       <div class="card flex-shrink-0 w-50 max-w-md shadow-2xl bg-base-100">
         <div class="card-body">
-          {/* <Elements>
-              <CheckoutForm order={order} />
-            </Elements> */}
+          <Elements stripe={stripePromise}>
+            <CheckoutForm order={order} />
+          </Elements>
         </div>
       </div>
     </div>
