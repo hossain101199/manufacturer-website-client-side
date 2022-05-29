@@ -25,19 +25,19 @@ const Tools = () => {
   }, [pagesize]);
   return (
     <div className=" container mx-auto ">
-      Tools
+      <div className="divider mt-6 card-title">Tools</div>
       <div className="grid md:grid-cols-3 gap-4">
         {Products.map((Product, index) => (
           <HomeItem key={index} Prorduct={Product}></HomeItem>
         ))}
       </div>
-      <div class="btn-group justify-center m-10 mx-auto">
+      <div className="btn-group justify-center m-10 mx-auto">
         {[...Array(pageCount).keys()].map((number) => (
           <input
             type="radio"
             name="options"
             data-title={number + 1}
-            class="btn"
+            className="btn"
             key={number}
             onClick={() => setpage(number)}
           />

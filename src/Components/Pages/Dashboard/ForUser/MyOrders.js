@@ -11,7 +11,8 @@ const MyOrders = () => {
   // ----------------------------------------------------------
   return (
     <div className=" container ">
-      My Orders
+      <div className="divider mt-6 card-title">My Orders</div>
+
       <table className=" flex container w-100 table table-hover table-responsive">
         <thead className="container">
           <tr>

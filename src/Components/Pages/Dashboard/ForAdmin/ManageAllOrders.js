@@ -6,7 +6,7 @@ const ManageAllOrders = () => {
   const [Orders] = SetOrders();
   return (
     <div className=" container ">
-      All Orders
+      <div className="divider mt-6 card-title">All Orders</div>
       <table className=" flex container w-100 table table-hover table-responsive">
         <thead className="container">
           <tr>

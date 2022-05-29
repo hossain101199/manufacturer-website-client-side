@@ -50,8 +50,9 @@ const AddReview = () => {
   };
 
   return (
-    <div>
-      Add A Review
+    <div className=" container ">
+      <div className="divider mt-6 card-title">Add A Review</div>
+
       <div className="card glass w-auto">
         <form onSubmit={handleADDreview} className="card-body">
           <div className="md:flex gap-x-8">

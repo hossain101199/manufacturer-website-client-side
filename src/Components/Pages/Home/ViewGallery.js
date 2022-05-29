@@ -15,6 +15,7 @@ import car12 from "../../Image/gallery (12).jpg";
 const ViewGallery = () => {
   return (
     <div className="mx-auto ">
+      <div className="divider mt-6 card-title">View Gallery</div>
       <div className="carousel w-full">
         <div id="slide1" className="carousel-item relative w-full">
           <img src={car1} className="h-80" alt="" />

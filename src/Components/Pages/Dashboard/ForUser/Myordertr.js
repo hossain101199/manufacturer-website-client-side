@@ -49,7 +49,7 @@ const Myordertr = ({ Order, index }) => {
                 Pay now
               </button>
 
-              <label for="my-modal" className="btn modal-button">
+              <label for={Order._id} className="btn modal-button">
                 Cancel
               </label>
             </>
@@ -57,18 +57,18 @@ const Myordertr = ({ Order, index }) => {
         </td>
       </tr>
       {/* <!-- Put this part before </body> tag --> */}
-      <input type="checkbox" id="my-modal" class="modal-toggle" />
-      <div class="modal">
-        <div class="modal-box">
-          <h3 class="font-bold text-lg">
+      <input type="checkbox" id={Order._id} className="modal-toggle" />
+      <div className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">
             are you sure??
             <br />
             you want to cancel this order
           </h3>
-          <p class="py-4">{Order.pname}</p>
-          <p class="py-4">{Order.quantity} unit </p>
-          <div class="modal-action" onClick={() => handleDelete(Order._id)}>
-            <label for="my-modal" class="btn">
+          <p className="py-4">{Order.pname}</p>
+          <p className="py-4">{Order.quantity} unit </p>
+          <div className="modal-action" onClick={() => handleDelete(Order._id)}>
+            <label for="my-modal" className="btn">
               Yay!
             </label>
           </div>

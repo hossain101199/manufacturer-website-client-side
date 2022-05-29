@@ -103,19 +103,19 @@ const Purchase = () => {
   return (
     <div className=" container mx-auto ">
       Purchase
-      <div class="card lg:card-side bg-base-100 shadow-xl">
+      <div className="card lg:card-side bg-base-100 shadow-xl">
         <figure className="basis-1/2">
           <img src={selectedproduct.img} alt="Album" />
         </figure>
         <div className="basis-1/2 card-body">
-          <h2 class="card-title">{selectedproduct.name}</h2>
-          <h3 class="card-title">
+          <h2 className="card-title">{selectedproduct.name}</h2>
+          <h3 className="card-title">
             price: $ {selectedproduct.price} (per unit)
           </h3>
-          <h4 class="card-title">
+          <h4 className="card-title">
             minimum order quantity {selectedproduct.minimumunit}
           </h4>
-          <h4 class="card-title">
+          <h4 className="card-title">
             available quantity {selectedproduct.availableunit}
           </h4>
           <p>{selectedproduct.description}</p>

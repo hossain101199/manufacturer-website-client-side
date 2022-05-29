@@ -4,13 +4,13 @@ import me from "../../Image/image2.png";
 const MyPortfolio = () => {
   return (
     <div className=" container mx-auto ">
-      <div class="card lg:card-side bg-base-100 shadow-xl">
+      <div className="card lg:card-side bg-base-100 shadow-xl">
         <figure>
           <img src={me} alt="Album" />
         </figure>
-        <div class="card-body">
-          <h2 class="card-title">MOHAMMAD HOSSAIN</h2>
-          <h4 class="">FRONT-END WEB DEVELOPER</h4>
+        <div className="card-body">
+          <h2 className="card-title">MOHAMMAD HOSSAIN</h2>
+          <h4 className="">FRONT-END WEB DEVELOPER</h4>
           <p>email address: fshossain10@gmail.com</p>
           <p>educational background:</p>
           <p>

@@ -6,7 +6,7 @@ const ManageProducts = () => {
   const [Allproduct] = SETAllproduct();
   return (
     <div className=" container ">
-      My Orders
+      <div className="divider mt-6 card-title">All product</div>
       <table className=" flex container w-100 table table-hover table-responsive">
         <thead className="container">
           <tr>
@@ -17,8 +17,12 @@ const ManageProducts = () => {
           </tr>
         </thead>
         <tbody>
-          {Allproduct.map((Order, index) => (
-            <Allorder key={Order.id} Order={Order} index={index}></Allorder>
+          {Allproduct.map((product, index) => (
+            <Allorder
+              key={product.id}
+              product={product}
+              index={index}
+            ></Allorder>
           ))}
         </tbody>
       </table>

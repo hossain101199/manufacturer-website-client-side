@@ -55,7 +55,7 @@ const AddProduct = () => {
   };
   return (
     <div>
-      Add A Product
+      <div className="divider mt-6 card-title">Add Product</div>
       <div className="card glass w-auto">
         <form onSubmit={handleSubmit(onSubmit)} className="card-body">
           <div className="md:flex gap-x-8">

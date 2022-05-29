@@ -49,7 +49,7 @@ const MyProfile = () => {
       .then((data) => {
         setIsReload(!isReload);
         e.target.reset();
-        toast.success("stock updated successfully!", {
+        toast.success("Profile updated successfully!", {
           position: "top-center",
           autoClose: 5000,
           hideProgressBar: false,
@@ -64,7 +64,8 @@ const MyProfile = () => {
 
   return (
     <div className=" container ">
-      My Profile
+      <div className="divider mt-6 card-title">My Profile</div>
+
       <div className="card glass w-auto">
         <figure>
           <img src={user?.photoURL} alt="car!" />
