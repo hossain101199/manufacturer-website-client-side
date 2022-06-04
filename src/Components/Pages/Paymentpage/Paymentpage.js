@@ -5,7 +5,6 @@ import { loadStripe } from "@stripe/stripe-js";
 import { useQuery } from "react-query";
 import Loading from "../../SharedComponents/Loading/Loading";
 import CheckoutForm from "./CheckoutForm";
-import SetOrders from "../../SharedComponents/Hooks/SetOrders";
 
 const stripePromise = loadStripe(
   "pk_test_51KzgdMJVa6zVY99CaGts94G8qqJirQWPMAET7VBqrec0wWSxhuuRtgQNPA3SuwzjQKOv6QWwjgMWEfZ83N1qLNUU00IX1ciL6e"

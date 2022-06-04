@@ -1,21 +1,16 @@
-import React, { useEffect, useState } from "react";
-import {
-  CardElement,
-  PaymentElement,
-  useElements,
-  useStripe,
-} from "@stripe/react-stripe-js";
+import React, { useState } from "react";
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 
 const CheckoutForm = ({ order }) => {
   const stripe = useStripe();
   const elements = useElements();
   const [cardError, setCardError] = useState("");
   const [success, setSuccess] = useState("");
-  const [processing, setProcessing] = useState(false);
+  const [setProcessing] = useState(false);
   const [transactionId, setTransactionId] = useState("");
-  const [clientSecret, setClientSecret] = useState("");
+  const [clientSecret] = useState("");
 
-  const { _id, price, name, email } = order;
+  const { name, email } = order;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -30,7 +25,7 @@ const CheckoutForm = ({ order }) => {
       return;
     }
 
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
+    const { error } = await stripe.createPaymentMethod({
       type: "card",
       card,
     });
@@ -60,10 +55,10 @@ const CheckoutForm = ({ order }) => {
       setSuccess("Congrats! Your payment is completed.");
 
       //store payment on database
-      const payment = {
-        orderid: _id,
-        transactionId: paymentIntent.id,
-      };
+      // const payment = {
+      //   orderid: _id,
+      //   transactionId: paymentIntent.id,
+      // };
     }
   };
   return (
