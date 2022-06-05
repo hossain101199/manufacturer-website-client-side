@@ -52,6 +52,12 @@ const AllOrders = ({ Order, index }) => {
       <input type="checkbox" id={Order._id} className="modal-toggle" />
       <div className="modal">
         <div className="modal-box">
+          <label
+            for={Order._id}
+            class="btn btn-sm btn-circle absolute right-2 top-2"
+          >
+            ✕
+          </label>
           <h3 className="font-bold text-lg">
             are you sure??
             <br />
