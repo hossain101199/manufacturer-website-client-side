@@ -30,23 +30,26 @@ const Paymentpage = () => {
 
   return (
     <div className=" container mx-auto ">
-      <div className="card w-50 max-w-md bg-base-100 shadow-xl my-12">
-        <div className="card-body">
-          <h2 className="card-title">{order.pname}</h2>
-          <p>Your ordered quantity: {order.quantity} Unit</p>
-          <p>Each unit price: $ {order.price}</p>
-          <p>
-            Please pay: $ {parseInt(order.quantity) * parseInt(order.price)}
-          </p>
+      <div className=" grid lg:grid-cols-2 justify-items-center ">
+        <div className="m-3 card  bg-base-100 shadow-xl my-12">
+          <div className="card-body">
+            <h2 className="card-title">{order.pname}</h2>
+            <p>Your ordered quantity: {order.quantity} Unit</p>
+            <p>Each unit price: $ {order.price}</p>
+            <p>
+              Please pay: $ {parseInt(order.quantity) * parseInt(order.price)}
+            </p>
+          </div>
+        </div>
+        <div className=" m-3 card flex-shrink-0 shadow-xl my-12 bg-base-100 w-full">
+          <div className="card-body">
+            <Elements stripe={stripePromise}>
+              <CheckoutForm order={order} />
+            </Elements>
+          </div>
         </div>
       </div>
-      <div className="card flex-shrink-0 w-50 max-w-md shadow-2xl bg-base-100">
-        <div className="card-body">
-          <Elements stripe={stripePromise}>
-            <CheckoutForm order={order} />
-          </Elements>
-        </div>
-      </div>
+
       <div className="divider mt-6"></div>
     </div>
   );
