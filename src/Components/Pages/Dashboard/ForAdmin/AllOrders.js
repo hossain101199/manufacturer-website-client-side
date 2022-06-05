@@ -41,7 +41,7 @@ const AllOrders = ({ Order, index }) => {
                 Update
               </button>
 
-              <label for={Order._id} className="btn modal-button">
+              <label htmlFor={Order._id} className="btn modal-button">
                 Cancel
               </label>
             </>
@@ -60,7 +60,7 @@ const AllOrders = ({ Order, index }) => {
           <p className="py-4">{Order.pname}</p>
           <p className="py-4">{Order.quantity} unit </p>
           <div className="modal-action" onClick={() => handleDelete(Order._id)}>
-            <label for="my-modal" className="btn">
+            <label htmlFor="my-modal" className="btn">
               Yay!
             </label>
           </div>

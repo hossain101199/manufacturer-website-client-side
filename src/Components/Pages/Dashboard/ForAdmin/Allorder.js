@@ -28,7 +28,7 @@ const Allorder = ({ product, index }) => {
           <button type="button" className="btn m-1">
             Update
           </button>
-          <label for={product._id} className="btn modal-button">
+          <label htmlFor={product._id} className="btn modal-button">
             Delete
           </label>
         </td>
@@ -48,7 +48,7 @@ const Allorder = ({ product, index }) => {
             className="modal-action"
             onClick={() => handleDelete(product._id)}
           >
-            <label for="my-modal" className="btn">
+            <label htmlFor="my-modal" className="btn">
               Yay!
             </label>
           </div>
